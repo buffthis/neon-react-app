@@ -19,7 +19,7 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Nginx가 사용하는 포트를 노출합니다.
-EXPOSE 80
+EXPOSE 3000
 
 # Nginx를 시작하는 명령어를 설정합니다.
 CMD ["nginx", "-g", "daemon off;"]
