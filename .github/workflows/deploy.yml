@@ -49,4 +49,5 @@ jobs:
           docker stop react-container || true
           docker rm react-container || true
           docker run -d -p 80:80 --name react-container sx0527/my-react-app:latest
-          docker logs react-container  # 컨테이너 로그 확인
+          sleep 10  # 컨테이너가 시작될 시간을 주기 위해 약간의 지연을 추가
+          docker logs react-container  # 컨테이너 로그를 확인
