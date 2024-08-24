@@ -11,6 +11,7 @@ RUN yarn build
 
 # Nginx를 사용하여 빌드된 애플리케이션을 제공하기 위한 설정
 FROM nginx:alpine
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/build /usr/share/nginx/html
 
 # Nginx가 사용하는 포트를 노출합니다.
