@@ -4,7 +4,7 @@ function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('http://54.180.157.200:8080/api/hello')
+    fetch('https://neon7.site:8080/api/hello')
       .then(response => response.text())
       .then(data => setMessage(data))
       .catch(error => console.error('Error fetching message:', error));
