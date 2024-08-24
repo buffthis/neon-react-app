@@ -13,7 +13,8 @@ RUN yarn build
 FROM nginx:alpine
 
 # Nginx 설정 파일 복사
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 # 빌드된 React 앱 파일 복사
 COPY --from=build /app/build /usr/share/nginx/html
