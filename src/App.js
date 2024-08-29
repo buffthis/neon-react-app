@@ -14,11 +14,10 @@ function App() {
   return (
     <div className="maintenance-container">
       <img src={image} alt="Maintenance" className="maintenance-image" />
-      <h1 className="maintenance-title">현재 사이트 점검 중입니다</h1>
+      <h1 className="maintenance-title">{message}</h1>
       <p className="maintenance-message">
-        더 나은 서비스를 제공하기 위해 현재 점검 중입니다. 잠시 후 다시 시도해 주세요.
+        더 나은 서비스를 제공하기 위해 현재 점검 중입니다.
       </p>
-      <small>{message}</small>
     </div>
   );
 }
