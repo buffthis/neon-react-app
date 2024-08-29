@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import image from './assets/logo-sky-lg.png'
 
 function App() {
   const [message, setMessage] = useState('');
@@ -12,7 +13,9 @@ function App() {
 
   return (
     <div className="App">
+      <img src={image} alt="logo" />
       <h1>{message}</h1>
+      We’re making some improvements to our site. Thank you for your patience.
     </div>
   );
 }
