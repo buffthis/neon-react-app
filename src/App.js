@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import image from './assets/logo-sky-lg.png'
+import image from './assets/logo-sky-lg.png';
+import './MaintenancePage.css';
 
 function App() {
   const [message, setMessage] = useState('');
