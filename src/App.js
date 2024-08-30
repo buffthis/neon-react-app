@@ -19,6 +19,12 @@ function App() {
       <p className="maintenance-message">
         더 나은 서비스를 제공하기 위해 현재 점검 중입니다.
       </p>
+      <p className="maintenance-note">
+        이전 버전의 서비스를 이용하시려면 <a href="http://ec2-54-180-133-79.ap-northeast-2.compute.amazonaws.com:8080" className="maintenance-link">여기</a>를 클릭하세요.
+      </p>
+      <p className="maintenance-small-note">
+        일부 기능이 동작하지 않을 수 있습니다.
+      </p>
     </div>
   );
 }

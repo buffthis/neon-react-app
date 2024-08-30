@@ -1,25 +1,48 @@
 .maintenance-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.maintenance-image {
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.maintenance-title {
+  font-size: 2rem;
+  color: #343a40;
+  margin-bottom: 10px;
+}
   
-  .maintenance-image {
-    max-width: 300px;
-    margin-bottom: 20px;
-  }
-  
-  .maintenance-title {
-    font-size: 2rem;
-    color: #343a40;
-    margin-bottom: 10px;
-  }
-  
-  .maintenance-message {
-    font-size: 1.2rem;
-    color: #6c757d;
-  }
+.maintenance-message {
+  font-size: 1.6rem;
+  color: #6c757d;
+}
+
+.maintenance-link {
+  color: #007bff;
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.maintenance-link:hover {
+  color: #0056b3;
+}
+
+.maintenance-note {
+  font-size: 1.0rem;
+  color: #6c757d;
+  margin-top: 20px;
+}
+
+.maintenance-small-note {
+  font-size: 0.7rem; /* 작은 글씨 크기 */
+  color: #999; /* 회색으로 눈에 덜 띄게 */
+  margin-top: 0px; /* 위 요소와의 간격 */
+}
