@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import image from './assets/logo-sky-lg.png';
+import githubLogo from './assets/github-logo.png';
+import notionLogo from './assets/notion-logo.png';
+import linktreeLogo from './assets/linktree-logo.jpg';
 import './MaintenancePage.css';
 
 function App() {
@@ -20,11 +23,25 @@ function App() {
         더 나은 서비스를 제공하기 위해 현재 점검 중입니다.
       </p>
       {/* <p className="maintenance-note">
-        이전 버전의 서비스를 이용하시려면 <a href="http://ec2-54-180-133-79.ap-northeast-2.compute.amazonaws.com:8080" className="maintenance-link">여기</a>를 클릭하세요.
+        이전 버전의 서비스를 이용하시려면 <a href="https://api.neon7.site" className="maintenance-link">여기</a>를 클릭하세요.
       </p>
       <p className="maintenance-small-note">
         일부 기능이 동작하지 않을 수 있습니다.
       </p> */}
+      <div className="links-wrapper">
+        <div className="link-container">
+          <img src={githubLogo} alt="GitHub" className="logo-sm" />
+          <a href="https://github.com/SteamedPapaya" className="link" target="_blank"와 rel="noopener noreferrer">https://github.com/SteamedPapaya</a>
+        </div>
+        <div className="link-container">
+          <img src={notionLogo} alt="Notion" className="logo-sm" />
+          <a href="https://www.notion.so/xiyoon/f8777a529adc4ae9997a1ae26fca172c?pvs=4" className="link" target="_blank"와 rel="noopener noreferrer">https://www.notion.so/xiyoon/neon</a>
+        </div>
+        <div className="link-container">
+          <img src={linktreeLogo} alt="Linktree" className="logo-sm" />
+          <a href="https://linktr.ee/xiyoon" className="link" target="_blank"와 rel="noopener noreferrer">https://linktr.ee/xiyoon</a>
+        </div>
+      </div>
     </div>
   );
 }

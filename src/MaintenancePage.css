@@ -46,3 +46,32 @@
   color: #999; /* 회색으로 눈에 덜 띄게 */
   margin-top: 0px; /* 위 요소와의 간격 */
 }
+
+.links-wrapper {
+  display: flex; /* 자식 요소들을 수평으로 나란히 정렬 */
+  flex-direction: column; /* 수직으로 정렬 */
+  gap: 6px; /* 링크들 간의 간격 설정 */
+  margin-top: 20px; /* 상단 여백 추가 */
+  justify-content: center; /* 가운데 정렬 */
+}
+
+.link-container {
+  display: flex; /* 로고와 링크를 수평으로 정렬 */
+  align-items: center; /* 가운데 정렬 */
+}
+
+.logo-sm {
+  width: 24px; /* 로고 크기 */
+  height: 24px; /* 로고 크기 */
+  margin-right: 8px; /* 로고와 링크 간의 간격 */
+}
+
+.link {
+  text-decoration: underline; /* 링크에 밑줄 추가 */
+  color: #333; /* 링크 색상 */
+  font-size: 14px; /* 링크 글꼴 크기 */
+}
+
+.link:hover {
+  color: #0366d6; /* 링크 호버 색상 */
+}
