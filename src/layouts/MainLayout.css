@@ -12,7 +12,7 @@
   .content {
     flex: 1; /* 가변적 높이로 설정 (화면을 채우도록) */
     overflow-y: auto; /* 내용이 많을 경우 스크롤 가능 */
-    padding: 20px; /* 내부 여백 */
+    padding: 0px; /* 내부 여백 */
     background-color: #f8f8f8; /* 배경색 설정 */
   }
   
