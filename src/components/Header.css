@@ -1,0 +1,152 @@
+/* src/components/Header.css */
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: var(--white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 50px; /* 로고 이미지 크기 */
+  width: auto;
+}
+
+.logoIcon,
+.logoText {
+  display: block;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  max-width: 300px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.searchBar:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  flex: 1;
+}
+
+.searchButton {
+  background-color: var(--primary);
+  border: none;
+  color: var(--white);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  margin-right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.menuButton:hover {
+  background-color: var(--secondary);
+}
+
+.userIcon {
+  cursor: pointer;
+  background-color: var(--white);
+  border-radius: 50%;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.userIcon:hover {
+  background-color: var(--secondary);
+}
+
+@media (max-width: 768px) {
+  .logoIcon,
+  .logoText {
+    display: none;
+  }
+
+  .logoContainer {
+    display: none;
+  }
+
+  .userMenu {
+    display: none;
+  }
+  
+  .searchBar {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}
+
+/* 드롭다운 메뉴 스타일 추가 */
+.userMenu .dropdownMenu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  display: none; /* 기본적으로 숨김 */
+}
+
+.userMenu:hover .dropdownMenu {
+  display: block; /* hover 시 드롭다운 표시 */
+}
+
+.dropdownMenuItem {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdownMenuItem:hover {
+  background-color: #f0f0f0;
+}

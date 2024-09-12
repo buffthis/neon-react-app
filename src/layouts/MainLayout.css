@@ -1,0 +1,23 @@
+/* src/layouts/MainLayout.css */
+.mainLayout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 전체 화면 높이 */
+  }
+  
+  .header {
+    flex: 0 0 auto; /* 고정된 높이로 설정 */
+  }
+  
+  .content {
+    flex: 1; /* 가변적 높이로 설정 (화면을 채우도록) */
+    overflow-y: auto; /* 내용이 많을 경우 스크롤 가능 */
+    padding: 20px; /* 내부 여백 */
+    background-color: #f8f8f8; /* 배경색 설정 */
+  }
+  
+  .bottomNav {
+    flex: 0 0 auto; /* 고정된 높이로 설정 */
+    border-top: 1px solid #ddd; /* 상단 테두리 */
+    background-color: #fff;
+  }

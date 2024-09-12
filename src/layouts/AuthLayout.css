@@ -1,0 +1,21 @@
+/* src/layouts/AuthLayout.css */
+.authLayout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 전체 화면 높이 사용 */
+    background-color: var(--background); /* 배경색 지정 */
+  }
+  
+  .authContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px; /* 최대 너비 설정 */
+    padding: 20px;
+    background-color: var(--background);
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
