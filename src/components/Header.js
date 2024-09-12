@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate import
-import { AiOutlineSearch, AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineSearch } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
 import './Header.css';
 import logoLight from '../assets/logo-light.png';
@@ -13,9 +13,9 @@ const Header = () => {
     navigate('/login'); // /login 경로로 이동
   };
 
-  const handleSignUp = () => {
-    navigate('/sign-up'); // /login 경로로 이동
-  };
+  // const handleSignUp = () => {
+  //   navigate('/sign-up'); // /login 경로로 이동
+  // };
 
   return (
     <header className="headerContainer">
