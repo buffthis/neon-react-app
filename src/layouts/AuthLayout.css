@@ -14,7 +14,7 @@
     justify-content: center;
     width: 100%;
     max-width: 400px; /* 최대 너비 설정 */
-    padding: 20px;
+    padding: 0px 20px;
     background-color: var(--background);
     /* border-radius: 8px; */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
