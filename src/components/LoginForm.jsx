@@ -13,7 +13,11 @@ const LoginForm = () => {
   const handleLogin = () => {
     // 로그인 처리 로직 (예: API 호출)
     // 로그인 후 페이지 이동
-    navigate('/'); // 이동할 페이지 경로 설정
+    navigate('/');
+  };
+
+  const handleOAuth2Login = (provider) => {
+    window.location.href = `/oauth2/authorization/${provider}`;
   };
 
   return (
@@ -29,13 +33,13 @@ const LoginForm = () => {
       </div> */}
       <button className="loginButton" onClick={handleLogin}>Login</button>
       <div className="socialLoginContainer">
-      <button className="socialButton">
+      <button className="socialButton" onClick={() => handleOAuth2Login('google')}>
           <img src={googleButton} alt="Google" /> {/* 가져온 이미지 사용 */}
         </button>
-        <button className="socialButton">
+        <button className="socialButton" onClick={() => handleOAuth2Login('naver')} >
           <img src={naverButton} alt="Naver" /> {/* 가져온 이미지 사용 */}
         </button>
-        <button className="socialButton">
+        <button className="socialButton" onClick={() => handleOAuth2Login('kakao')}>
           <img src={kakaoButton} alt="Kakao" /> {/* 가져온 이미지 사용 */}
         </button>
       </div>
