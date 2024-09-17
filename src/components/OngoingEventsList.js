@@ -3,7 +3,7 @@ import { fetchOngoingEvents } from '../api/api';
 import EventCard from './EventCard';
 import { Box, CircularProgress, Typography, Stack } from '@mui/material';
 
-const OngoingEventsList = () => {
+const OngoingEventsList = ({ refresh }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,7 +23,7 @@ const OngoingEventsList = () => {
     };
 
     loadEvents();
-  }, []);
+  }, [refresh]); // 'refresh' prop이 변경되면 이벤트 목록을 다시 로드
 
   if (loading) return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
