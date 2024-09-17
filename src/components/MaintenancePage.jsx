@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../store/authStore';
+import useAuthStore from '../stores/authStore';
 import './MaintenancePage.css';
 import image from '../assets/logo-sky-lg.png';
 import githubLogo from '../assets/github-logo.png';

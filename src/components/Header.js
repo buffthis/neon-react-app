@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate import
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdAccountCircle } from 'react-icons/md';
-import useAuthStore from '../store/authStore'; // zustand store import
+import useAuthStore from '../stores/authStore'; // zustand store import
 import './Header.css';
 import logoLight from '../assets/logo-light.png';
 
