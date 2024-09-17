@@ -47,3 +47,17 @@ export const login = async (email, password) => {
 export const getOAuth2LoginUrl = (provider) => {
   return `${API_ORIGIN}/oauth2/authorization/${provider}`;
 };
+
+/**
+ * 진행 중인 이벤트 목록을 가져오는 함수.
+ * @returns {Promise} 진행 중인 이벤트 목록 또는 오류
+ */
+export const fetchOngoingEvents = async () => {
+  try {
+    const response = await axios.get(`${API_ORIGIN}/api/events/ongoing`);
+    return response.data.events;  // 필요한 데이터 형식에 따라 조정
+  } catch (error) {
+    console.error('Failed to fetch ongoing events:', error);
+    throw error;
+  }
+};
