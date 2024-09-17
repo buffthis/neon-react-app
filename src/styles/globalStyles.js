@@ -16,6 +16,10 @@ export const GlobalStyles = createGlobalStyle`
     background-color: var(--white);
     color: var(--text);
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
   }
 
   a {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Chat from '../Chat';
-// import useChatStore from '../../stores/useChatStore';
 
 jest.mock('../../hooks/useChatWebSocket', () => ({
   __esModule: true,
@@ -11,27 +10,20 @@ jest.mock('../../hooks/useChatWebSocket', () => ({
   }),
 }));
 
-test('renders chat input and send button', () => {
+test('prompts for username before chatting', () => {
   render(<Chat />);
-  const inputElement = screen.getByRole('textbox');
-  const buttonElement = screen.getByText(/send/i);
-  expect(inputElement).toBeInTheDocument();
-  expect(buttonElement).toBeInTheDocument();
+  const dialogTitle = screen.getByText(/enter your username/i);
+  expect(dialogTitle).toBeInTheDocument();
 });
 
-test('sends message when send button is clicked', () => {
-  const { sendMessage } = require('../../hooks/useChatWebSocket').default();
+test('allows user to set username and start chatting', () => {
   render(<Chat />);
-  const inputElement = screen.getByRole('textbox');
-  const buttonElement = screen.getByText(/send/i);
+  const usernameInput = screen.getByLabelText(/username/i);
+  const startButton = screen.getByText(/start chatting/i);
 
-  fireEvent.change(inputElement, { target: { value: 'Hello World' } });
-  fireEvent.click(buttonElement);
+  fireEvent.change(usernameInput, { target: { value: 'Tester' } });
+  fireEvent.click(startButton);
 
-  expect(sendMessage).toHaveBeenCalledWith(
-    JSON.stringify({
-      sender: 'Anonymous',
-      content: 'Hello World',
-    })
-  );
+  expect(screen.queryByText(/enter your username/i)).toBeNull();
+  expect(screen.getByPlaceholderText(/type a message/i)).toBeInTheDocument();
 });
