@@ -1,6 +1,6 @@
-// src/store/eventStore.js
+// src/stores/eventStore.js
 import create from 'zustand';
-import axios from 'axios';
+import { fetchOngoingEvents } from '../api/api';
 
 const useEventStore = create((set) => ({
   events: [],
@@ -9,8 +9,8 @@ const useEventStore = create((set) => ({
   fetchEvents: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get('/api/events/ongoing');  // API 엔드포인트 수정 필요
-      set({ events: response.data.events, loading: false });
+      const events = await fetchOngoingEvents();  // API 호출
+      set({ events, loading: false });
     } catch (err) {
       set({ error: err.message, loading: false });
     }
