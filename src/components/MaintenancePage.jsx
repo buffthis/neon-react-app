@@ -10,7 +10,7 @@ import potatoLogo from '../assets/potato-fit.png';
 import { getToken } from '../api/api'; // 모듈화된 API 함수들 가져오기
 
 const Maintenance = () => {
-  const [message, setMessage] = useState('');
+  const [message] = useState('');
   const navigate = useNavigate();
   const { user, setUser, logout } = useAuthStore(); // user 상태 관리 및 로그아웃 함수
 
