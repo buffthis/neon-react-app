@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import MainLayout from '../layouts/MainLayout';
 import AuthLayout from '../layouts/AuthLayout';
 import Maintenance from '../components/MaintenancePage';
+import Chat from '../components/Chat';
 
 const AppRoutes = () => {
   return (
@@ -12,7 +13,7 @@ const AppRoutes = () => {
       {/* 인증 레이아웃이 필요한 경우 */}
       <Route path="/" element={<MainLayout><Maintenance/></MainLayout>} />
       <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} /> 
-      
+      <Route path="/chat" element={<Chat />} />
       {/* 다른 페이지 경로 추가 */}
     </Routes>
   );
