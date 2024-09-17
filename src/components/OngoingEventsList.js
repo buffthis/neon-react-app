@@ -1,15 +1,29 @@
-// src/components/OngoingEventsList.js
-import React, { useEffect } from 'react';
-import useEventStore from '../stores/eventStore';
+import React, { useEffect, useState } from 'react';
+import { fetchOngoingEvents } from '../api/api';
 import EventCard from './EventCard';
 import { Box, CircularProgress, Typography, Stack } from '@mui/material';
 
 const OngoingEventsList = () => {
-  const { events, loading, error, fetchEvents } = useEventStore();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchEvents();
-  }, [fetchEvents]);
+    const loadEvents = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchOngoingEvents();
+        setEvents(data);
+      } catch (err) {
+        setError('Failed to load events.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadEvents();
+  }, []);
 
   if (loading) return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
@@ -19,7 +33,7 @@ const OngoingEventsList = () => {
 
   if (error) return (
     <Typography color="error" variant="h6" align="center" sx={{ mt: 4 }}>
-      Error fetching events: {error}
+      {error}
     </Typography>
   );
 
@@ -33,7 +47,7 @@ const OngoingEventsList = () => {
       >
         {events.length > 0 ? (
           events.map((event) => (
-            <Box key={event.eventId} sx={{ mb: 4 }}>
+            <Box key={event.id} sx={{ mb: 4 }}>
               <EventCard event={event} />
             </Box>
           ))
