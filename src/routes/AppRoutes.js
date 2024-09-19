@@ -17,7 +17,7 @@ const AppRoutes = () => {
       {/* 로그인 페이지는 AuthLayout 사용 */}
       <Route path="/login" element={<Login />} />
       {/* 채팅 페이지 */}
-      <Route path="/chat" element={<MainLayout><Chat /></MainLayout>} />
+      <Route path="/chat" element={<Chat />} />
       {/* 유지보수 페이지 */}
       <Route path="/maintenance" element={<MainLayout><Maintenance /></MainLayout>} />
       {/* 이벤트 생성 페이지 */}
