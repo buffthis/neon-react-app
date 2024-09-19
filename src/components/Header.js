@@ -19,6 +19,10 @@ const Header = () => {
     navigate('/mypage'); // /mypage 경로로 이동
   };
 
+  const handleMessage = () => {
+    navigate('/chat'); // /chat 경로로 이동
+  };
+
   const handleLogout = () => {
     logout(); // zustand의 logout 함수 호출
     navigate('/'); // 홈 페이지로 이동
@@ -43,6 +47,7 @@ const Header = () => {
             {user ? ( // 사용자가 로그인한 경우
               <>
                 <div className="dropdownMenuItem" onClick={handleMyPage}>My Page</div>
+                <div className="dropdownMenuItem" onClick={handleMessage}>Message</div>
                 <div className="dropdownMenuItem" onClick={handleLogout}>Logout</div>
               </>
             ) : ( // 사용자가 로그인하지 않은 경우
