@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { fetchOngoingEvents } from '../api/api';
 import EventCard from './EventCard';
-import { Box, CircularProgress, Typography, Stack } from '@mui/material';
+import { CircularProgress, Typography, Box } from '@mui/material';
+import styles from './OngoingEventsList.module.css'; // CSS 모듈 import
 
 const OngoingEventsList = ({ refresh }) => {
   const [events, setEvents] = useState([]);
@@ -26,28 +27,23 @@ const OngoingEventsList = ({ refresh }) => {
   }, [refresh]); // 'refresh' prop이 변경되면 이벤트 목록을 다시 로드
 
   if (loading) return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+    <Box className={styles.loadingContainer}>
       <CircularProgress />
     </Box>
   );
 
   if (error) return (
-    <Typography color="error" variant="h6" align="center" sx={{ mt: 4 }}>
+    <Typography className={styles.errorText} variant="h6">
       {error}
     </Typography>
   );
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
-      <Stack
-        direction="row"
-        spacing={4}
-        flexWrap="wrap"
-        justifyContent="center"
-      >
+    <Box className={styles.container}>
+      <div className={styles.stack}>
         {events.length > 0 ? (
           events.map((event) => (
-            <Box key={event.id} sx={{ mb: 4 }}>
+            <Box key={event.id}>
               <EventCard event={event} />
             </Box>
           ))
@@ -56,7 +52,7 @@ const OngoingEventsList = ({ refresh }) => {
             No ongoing events at the moment.
           </Typography>
         )}
-      </Stack>
+      </div>
     </Box>
   );
 };

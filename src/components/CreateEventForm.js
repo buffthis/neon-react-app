@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createEvent } from '../api/api';
 import { Box, Button, TextField, Typography } from '@mui/material';
+import styles from './CreateEventForm.module.css'; // CSS 모듈 import
 
 const CreateEventForm = () => {
   const [title, setTitle] = useState('');
@@ -36,15 +37,15 @@ const CreateEventForm = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: 400, margin: '0 auto' }}>
-      <Typography variant="h5" align="center">Create New Event</Typography>
+    <Box component="form" onSubmit={handleSubmit} className={styles.formContainer}>
+      <Typography variant="h5" className={styles.formTitle}>Create New Event</Typography>
       <TextField label="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
       <TextField label="Description" value={description} onChange={(e) => setDescription(e.target.value)} multiline rows={4} required />
       <TextField type="datetime-local" label="Start Time" value={startTime} onChange={(e) => setStartTime(e.target.value)} required InputLabelProps={{ shrink: true }} />
       <TextField type="datetime-local" label="End Time" value={endTime} onChange={(e) => setEndTime(e.target.value)} required InputLabelProps={{ shrink: true }} />
       <TextField label="Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
       <TextField label="Cover Image URL" value={coverImageUrl} onChange={(e) => setCoverImageUrl(e.target.value)} />
-      <Button type="submit" variant="contained" color="primary">Create Event</Button>
+      <Button type="submit" variant="contained" className={styles.submitButton}>Create Event</Button>
     </Box>
   );
 };

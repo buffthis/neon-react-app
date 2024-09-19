@@ -12,9 +12,10 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* MainLayout을 사용하는 기본 경로 */}
-      <Route path="/" element={<MainLayout><OngoingEventsList /></MainLayout>} />
+      {/* <Route path="/" element={<MainLayout><OngoingEventsList /></MainLayout>} /> */}
+      <Route path="/" element={<MainLayout><Maintenance /></MainLayout>} />
       {/* 로그인 페이지는 AuthLayout 사용 */}
-      <Route path="/login" element={<AuthLayout><Login /></AuthLayout>} />
+      <Route path="/login" element={<Login />} />
       {/* 채팅 페이지 */}
       <Route path="/chat" element={<MainLayout><Chat /></MainLayout>} />
       {/* 유지보수 페이지 */}

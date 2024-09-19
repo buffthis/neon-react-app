@@ -1,0 +1,28 @@
+/* src/components/OngoingEventsList.module.css */
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 64px; /* 4단위 여백 */
+    margin-top: 64px; /* 상단 여백 */
+  }
+  
+  .stack {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px; /* 카드 사이의 간격 */
+  }
+  
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+  
+  .errorText {
+    margin-top: 32px; /* 에러 메시지의 상단 여백 */
+    color: red; /* 에러 색상 */
+    text-align: center;
+  }
