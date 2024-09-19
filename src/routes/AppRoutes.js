@@ -2,10 +2,9 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom'; // Routes와 Route로 변경
 import Login from '../pages/Login';
 import MainLayout from '../layouts/MainLayout';
-import AuthLayout from '../layouts/AuthLayout';
 import Maintenance from '../components/MaintenancePage';
 import Chat from '../components/Chat';
-import OngoingEventsList from '../components/OngoingEventsList'; // 진행 중인 이벤트 목록 페이지
+// import OngoingEventsList from '../components/OngoingEventsList'; // 진행 중인 이벤트 목록 페이지
 import CreateEventForm from '../components/CreateEventForm'; // 이벤트 생성 폼
 
 const AppRoutes = () => {
