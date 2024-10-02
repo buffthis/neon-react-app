@@ -53,7 +53,7 @@ export const getOAuth2LoginUrl = (provider) => {
  */
 export const fetchOngoingEvents = async () => {
   try {
-    const response = await axios.get(`${API_ORIGIN}/api/events`);
+    const response = await axios.get(`${API_ORIGIN}/events`);
     return response.data;  // 필요한 데이터 형식에 따라 조정
   } catch (error) {
     console.error('Failed to fetch ongoing events:', error);
@@ -68,7 +68,7 @@ export const fetchOngoingEvents = async () => {
  */
 export const createEvent = async (event) => {
   try {
-    const response = await axios.post(`${API_ORIGIN}/api/events`, event);
+    const response = await axios.post(`${API_ORIGIN}/events`, event);
     return response.data;
   } catch (error) {
     console.error('Failed to create event:', error);
@@ -82,7 +82,7 @@ export const createEvent = async (event) => {
  */
 export const fetchTickets = async () => {
   try {
-    const response = await axios.get(`${API_ORIGIN}/api/tickets`);
+    const response = await axios.get(`${API_ORIGIN}/tickets`);
     return response.data;  // 필요한 데이터 형식에 따라 조정
   } catch (error) {
     console.error('Failed to fetch tickets:', error);
@@ -97,7 +97,7 @@ export const fetchTickets = async () => {
  */
 export const createTicket = async (ticket) => {
   try {
-    const response = await axios.post(`${API_ORIGIN}/api/tickets`, ticket);
+    const response = await axios.post(`${API_ORIGIN}/tickets`, ticket);
     return response.data;
   } catch (error) {
     console.error('Failed to create ticket:', error);
