@@ -7,7 +7,7 @@ import image from '../assets/logo-sky-lg.png';
 import notionLogo from '../assets/notion-logo.png';
 import potatoLogo from '../assets/potato-fit.png';
 import useAuthStore from '../stores/authStore';
-import './MaintenancePage.css';
+import './MaintenanceForm.css';
 
 const Maintenance = () => {
   const [message] = useState('');
