@@ -6,8 +6,8 @@ import MainLayout from '../layouts/MainLayout';
 const OngoingEventsListPage = () => {
   return (
     <MainLayout>
-      <MaintenanceForm />
       <OngoingEventsList />
+      <MaintenanceForm />
     </MainLayout>
   );
 };
