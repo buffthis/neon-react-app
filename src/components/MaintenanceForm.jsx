@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../stores/authStore';
-import './MaintenancePage.css';
-import image from '../assets/logo-sky-lg.png';
-import githubLogo from '../assets/github-logo.png';
-import notionLogo from '../assets/notion-logo.png';
-import linktreeLogo from '../assets/linktree-logo.jpg';
-import potatoLogo from '../assets/potato-fit.png';
 import { getToken } from '../api/api'; // 모듈화된 API 함수들 가져오기
+import githubLogo from '../assets/github-logo.png';
+import linktreeLogo from '../assets/linktree-logo.jpg';
+import image from '../assets/logo-sky-lg.png';
+import notionLogo from '../assets/notion-logo.png';
+import potatoLogo from '../assets/potato-fit.png';
+import useAuthStore from '../stores/authStore';
+import './MaintenanceForm.css';
 
 const Maintenance = () => {
   const [message] = useState('');
   const navigate = useNavigate();
-  const { user, setUser, logout } = useAuthStore(); // user 상태 관리 및 로그아웃 함수
+  const { user, setUser } = useAuthStore(); // user 상태 관리 및 로그아웃 함수
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,7 +21,7 @@ const Maintenance = () => {
 
       if (token) {
         try {
-          const response = await fetch('http://localhost:8080/api/user/me', {
+          const response = await fetch(`${process.env.REACT_APP_API_ORIGIN}/api/user/me`, {
             headers: {
               'Authorization': `Bearer ${token}` // JWT 토큰을 Authorization 헤더로 추가
             }
@@ -29,6 +29,9 @@ const Maintenance = () => {
 
           if (response.ok) {
             console.log('/api/user/me Success');
+            const contentType = response.headers.get('content-type');
+            console.log('response:', response);
+            console.log('contentType: ', contentType);
             const userData = await response.json();
             console.log('user:', userData);
             setUser(userData); // 유저 정보 설정
@@ -52,6 +55,12 @@ const Maintenance = () => {
       {/* 페이지 공통 요소 렌더링 */}
       <img src={image} alt="Maintenance" className="maintenance-image" />
       <h1 className="maintenance-title">{message}</h1>
+      {/* 유저 정보가 있는 경우 유저 정보를 보여줌 */}
+      {user && (
+        <p className="maintenance-message">
+          Welcome, {user.name}! {/* 유저 이름 표시 */}
+        </p>
+      )}
       <p className="maintenance-message">
         더 나은 서비스를 제공하기 위해 현재 점검 중입니다.
       </p>
@@ -74,13 +83,7 @@ const Maintenance = () => {
         </div>
       </div>
 
-      {/* 유저 정보가 있는 경우 유저 정보를 보여줌 */}
-      {user && (
-        <div className="home-page">
-          <h2>Welcome, {user.name}!</h2> {/* 유저 이름 표시 */}
-          <button onClick={logout}>Logout</button> {/* 로그아웃 버튼 */}
-        </div>
-      )}
+
     </div>
   );
 };

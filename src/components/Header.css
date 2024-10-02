@@ -65,6 +65,7 @@
 .userMenu {
   display: flex;
   align-items: center;
+  justify-content: center; /* Ensure alignment in the middle */
   position: relative;
 }
 
@@ -124,21 +125,24 @@
   }
 }
 
-/* 드롭다운 메뉴 스타일 추가 */
-.userMenu .dropdownMenu {
+/* Ensure dropdown menu is hidden by default */
+.dropdownMenu {
   position: absolute;
-  top: 40px;
+  top: 100%;
   right: 0;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
   width: 200px;
-  display: none; /* 기본적으로 숨김 */
+  display: none; /* Hidden by default */
+  z-index: 999;
 }
 
-.userMenu:hover .dropdownMenu {
-  display: block; /* hover 시 드롭다운 표시 */
+/* Show dropdown on hover over the hamburger icon or dropdown itself */
+.userMenu:hover .dropdownMenu,
+.dropdownMenu:hover {
+  display: block;
 }
 
 .dropdownMenuItem {
@@ -149,4 +153,11 @@
 
 .dropdownMenuItem:hover {
   background-color: #f0f0f0;
+}
+
+.hamburgerIcon {
+  display: flex;
+  align-items: center; /* Vertically center the hamburger icon */
+  justify-content: center;
+  height: 100%; /* Make sure the icon takes full height of the container */
 }

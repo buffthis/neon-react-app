@@ -1,4 +1,3 @@
-// src/components/Chat.js
 import React, { useState, useEffect, useRef } from 'react';
 import useChatStore from '../stores/useChatStore';
 import useChatWebSocket from '../hooks/useChatWebSocket';
@@ -6,29 +5,51 @@ import {
   Box,
   IconButton,
   Dialog,
-  DialogActions,
   DialogContent,
   DialogTitle,
-  Button,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; // 나가기 버튼 아이콘
 import styles from './Chat.module.css';
-import logo from '../assets/logo-sky-lg.png'; // 로고 이미지 임포트
+import logo from '../assets/logo-sky-lg.png';
+import axios from 'axios'; // Axios for API calls
+import { useNavigate } from 'react-router-dom'; // To redirect on error
 
 const Chat = () => {
   const [message, setMessage] = useState('');
   const { messages } = useChatStore();
   const { sendMessage } = useChatWebSocket();
   const messagesEndRef = useRef(null);
-  const [username, setUsername] = useState('');
-  const [open, setOpen] = useState(true);
+  const [username, setUsername] = useState(''); // This will hold the user's name from backend
+  const [open, setOpen] = useState(true); // Dialog will open based on username fetch
+  const navigate = useNavigate();
+
+  // Fetch the user's name from the backend
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_ORIGIN}/api/user/me`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Ensure JWT is sent
+          },
+        });
+        if (response.data) {
+          setUsername(response.data.name); // Set the username to the fetched name
+          setOpen(false); // Close dialog once we have the username
+        }
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+        navigate('/login'); // Redirect to login if there's an error (e.g., unauthorized)
+      }
+    };
+    fetchUserName();
+  }, [navigate]);
 
   const handleSendMessage = () => {
     if (message.trim() === '') return;
     const chatMessage = {
-      sender: username,
+      sender: username, // Use the fetched username
       content: message,
     };
     sendMessage(JSON.stringify(chatMessage));
@@ -37,14 +58,8 @@ const Chat = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault(); // 줄바꿈 방지
+      e.preventDefault(); // Prevent line breaks
       handleSendMessage();
-    }
-  };
-
-  const handleUsernameSubmit = () => {
-    if (username.trim() !== '') {
-      setOpen(false);
     }
   };
 
@@ -54,37 +69,22 @@ const Chat = () => {
 
   return (
     <>
+      {/* Dialog to input username is no longer necessary since we're fetching it */}
       <Dialog open={open} disableEscapeKeyDown>
-        <DialogTitle>유저네임을 입력하세요</DialogTitle>
+        <DialogTitle>Fetching User Information...</DialogTitle>
         <DialogContent>
-          <input
-            autoFocus
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{
-              padding: '10px',
-              width: '100%',
-              borderRadius: '5px',
-              border: '1px solid #ccc',
-            }}
-          />
+          <p>Please wait while we retrieve your username.</p>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleUsernameSubmit} style={{ color: '#C4D7EC' }}>
-            채팅 시작
-          </Button>
-        </DialogActions>
       </Dialog>
       <Box className={styles.chatContainer}>
         <Box className={styles.header}>
-          {/* 왼쪽에 배치된 뒤로가기 버튼 */}
+          {/* Back button */}
           <IconButton className={styles.backButton}>
             <ArrowBackIosIcon />
           </IconButton>
-          {/* 가운데에 배치된 로고 */}
+          {/* Logo */}
           <img src={logo} alt="Logo" className={styles.logo} />
-          {/* 오른쪽 빈 공간 */}
+          {/* Right side spacing */}
           <div style={{ width: '40px' }}></div>
         </Box>
         <Box className={styles.messagesContainer}>
@@ -94,7 +94,7 @@ const Chat = () => {
               ? `${styles.messageItem} ${styles.myMessage}`
               : `${styles.messageItem} ${styles.otherMessage}`;
 
-            // 연속된 메시지의 위치에 따른 클래스 추가
+            // Position classes based on message sequence
             let positionClass = '';
 
             const prevMsg = messages[index - 1];
@@ -116,7 +116,7 @@ const Chat = () => {
               positionClass = styles.middle;
             }
 
-            // 유저네임 표시 여부 결정
+            // Show username if not my message
             const showUsername =
               !isMyMessage &&
               (index === 0 || messages[index - 1].sender !== msg.sender);

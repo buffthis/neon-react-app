@@ -5,7 +5,7 @@ import useChatStore from '../stores/useChatStore';
 const useChatWebSocket = () => {
   const { addMessage } = useChatStore();
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    'ws://localhost:8080/chat'
+    `${process.env.REACT_APP_WS_ORIGIN}/chat`
   );
 
   useEffect(() => {
