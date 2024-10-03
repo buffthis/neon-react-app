@@ -1,12 +1,13 @@
 // src/components/LoginForm.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // useNavigate 사용
-import { login, getOAuth2LoginUrl, setToken } from '../api/api'; // 모듈화된 API 함수들 가져오기
+import { login, getOAuth2LoginUrl } from '../api/authApi'; // 모듈화된 API 함수들 가져오기
 import './LoginForm.css'; // CSS 파일 import
 import googleButton from '../assets/button/google-button.png'; // 이미지 import
 import naverButton from '../assets/button/naver-button.png'; // 이미지 import
 import kakaoButton from '../assets/button/kakao-button.png'; // 이미지 import
 import logoSky from '../assets/logo-sky-lg.png';
+import { setTokenToLocalStorage } from '../utils/tokenUtils';
 
 /**
  * 사용자 로그인 및 소셜 로그인을 위한 React 컴포넌트.
@@ -23,7 +24,7 @@ const LoginForm = () => {
   const handleLogin = async () => {
     try {
       const token = await login(email, password); // API 모듈의 login 함수 호출
-      setToken(token); // JWT 토큰을 로컬 스토리지에 저장
+      setTokenToLocalStorage(token); // JWT 토큰을 로컬 스토리지에 저장
       alert('로그인 성공');
       navigate('/'); // 로그인 성공 후 홈 페이지로 이동
     } catch (error) {
@@ -44,7 +45,7 @@ const LoginForm = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token'); // URL에서 토큰 가져오기
     if (token) {
-      setToken(token); // JWT 토큰 저장
+      setTokenToLocalStorage(token); // JWT 토큰 저장
       console.log('Token saved to localStorage:', token);
       navigate('/'); // 메인 페이지로 이동
     }

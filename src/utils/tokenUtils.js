@@ -1,6 +1,13 @@
 export const getTokenFromLocalStorage = () => {
     return localStorage.getItem('jwtToken');
   };
+
+ /** JWT 토큰을 저장하는 함수.
+  * @param {string} token - JWT 토큰 문자열
+  */
+ export const setTokenToLocalStorage = (token) => {
+   localStorage.setItem('jwtToken', token);
+ };
   
   export const validateToken = (token) => {
     if (!token) return false;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createEvent } from '../api/api';
+import { createEvent } from '../api/eventApi';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import styles from './CreateEventForm.module.css'; // CSS 모듈 import
 
