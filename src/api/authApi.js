@@ -25,5 +25,5 @@ export const login = async (email, password) => {
  * @returns {string} 소셜 로그인 URL
  */
 export const getOAuth2LoginUrl = (provider) => {
-  return `/oauth2/authorization/${provider}`;
+  return `https://api.neon7.site/oauth2/authorization/${provider}`;
 };
