@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../api/api'; // 모듈화된 API 함수들 가져오기
+import { getTokenFromLocalStorage } from '../utils/tokenUtils';
 import githubLogo from '../assets/github-logo.png';
 import linktreeLogo from '../assets/linktree-logo.jpg';
 import image from '../assets/logo-sky-lg.png';
@@ -16,7 +16,7 @@ const Maintenance = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = getToken(); // 로컬 스토리지에서 JWT 토큰 가져오기
+      const token = getTokenFromLocalStorage(); // 로컬 스토리지에서 JWT 토큰 가져오기
       console.log('userinfo token:', token);
 
       if (token) {

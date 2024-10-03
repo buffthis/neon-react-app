@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchOngoingEvents } from '../api/api';
+import { fetchOngoingEvents } from '../api/eventApi';
 import EventCard from './EventCard';
 import { CircularProgress, Typography, Box } from '@mui/material';
 import styles from './OngoingEventsList.module.css'; // CSS 모듈 import
