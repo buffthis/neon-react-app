@@ -13,8 +13,8 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'; // 나가기 버튼 아이콘
 import styles from './Chat.module.css';
 import logo from '../assets/logo-sky-lg.png';
-import axios from 'axios'; // Axios for API calls
 import { useNavigate } from 'react-router-dom'; // To redirect on error
+import { fetchMe } from '../api/userApi';
 
 const Chat = () => {
   const [message, setMessage] = useState('');
@@ -29,18 +29,12 @@ const Chat = () => {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_ORIGIN}/users/me`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Ensure JWT is sent
-          },
-        });
-        if (response.data) {
-          setUsername(response.data.name); // Set the username to the fetched name
-          setOpen(false); // Close dialog once we have the username
-        }
+        const userData = await fetchMe();  // Use the fetchMe function from userApi.js
+        setUsername(userData.name);  // Set the username to the fetched name
+        setOpen(false);  // Close dialog once we have the username
       } catch (error) {
         console.error("Failed to fetch user data:", error);
-        navigate('/login'); // Redirect to login if there's an error (e.g., unauthorized)
+        navigate('/login');  // Redirect to login if there's an error (e.g., unauthorized)
       }
     };
     fetchUserName();

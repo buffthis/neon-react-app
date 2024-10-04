@@ -8,7 +8,7 @@ const useAuthStore = create((set) => ({
   // 로그아웃 함수 추가
   logout: async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_ORIGIN}/api/auth/logout`, {
+      const response = await fetch(`${process.env.REACT_APP_API_ORIGIN}/auth/logout`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // JWT 토큰 전송
