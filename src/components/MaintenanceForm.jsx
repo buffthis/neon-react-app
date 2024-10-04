@@ -21,7 +21,7 @@ const Maintenance = () => {
 
       if (token) {
         try {
-          const response = await fetch(`${process.env.REACT_APP_API_ORIGIN}/api/user/me`, {
+          const response = await fetch(`${process.env.REACT_APP_API_ORIGIN}/users/me`, {
             headers: {
               'Authorization': `Bearer ${token}` // JWT 토큰을 Authorization 헤더로 추가
             }

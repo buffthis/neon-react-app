@@ -29,7 +29,7 @@ const Chat = () => {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_ORIGIN}/api/user/me`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_ORIGIN}/api/users/me`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`, // Ensure JWT is sent
           },
