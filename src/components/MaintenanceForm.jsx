@@ -28,7 +28,7 @@ const Maintenance = () => {
           });
 
           if (response.ok) {
-            console.log('/api/user/me Success');
+            console.log('/user/me Success');
             const contentType = response.headers.get('content-type');
             console.log('response:', response);
             console.log('contentType: ', contentType);
@@ -36,7 +36,7 @@ const Maintenance = () => {
             console.log('user:', userData);
             setUser(userData); // 유저 정보 설정
           } else if (response.status === 401) {
-            console.log('/api/user/me Failed with 401 Unauthorized');
+            console.log('/user/me Failed with 401 Unauthorized');
             // 리다이렉트 대신 에러 메시지 출력
           }
         } catch (error) {
