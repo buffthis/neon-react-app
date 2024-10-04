@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTokenFromLocalStorage } from '../utils/tokenUtils';
 import githubLogo from '../assets/github-logo.png';
 import linktreeLogo from '../assets/linktree-logo.jpg';
 import image from '../assets/logo-sky-lg.png';
@@ -8,6 +7,7 @@ import notionLogo from '../assets/notion-logo.png';
 import potatoLogo from '../assets/potato-fit.png';
 import useAuthStore from '../stores/authStore';
 import './MaintenanceForm.css';
+import { fetchMe } from '../api/userApi';
 
 const Maintenance = () => {
   const [message] = useState('');
@@ -16,34 +16,15 @@ const Maintenance = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = getTokenFromLocalStorage(); // 로컬 스토리지에서 JWT 토큰 가져오기
-      console.log('userinfo token:', token);
-
-      if (token) {
-        try {
-          const response = await fetch(`${process.env.REACT_APP_API_ORIGIN}/users/me`, {
-            headers: {
-              'Authorization': `Bearer ${token}` // JWT 토큰을 Authorization 헤더로 추가
-            }
-          });
-
-          if (response.ok) {
-            console.log('/user/me Success');
-            const contentType = response.headers.get('content-type');
-            console.log('response:', response);
-            console.log('contentType: ', contentType);
-            const userData = await response.json();
-            console.log('user:', userData);
-            setUser(userData); // 유저 정보 설정
-          } else if (response.status === 401) {
-            console.log('/user/me Failed with 401 Unauthorized');
-            // 리다이렉트 대신 에러 메시지 출력
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
+      try {
+        const userData = await fetchMe();  // userApi.js의 fetchMe 함수 호출
+        console.log('user:', userData);
+        setUser(userData); // 유저 정보 설정
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        if (error.response && error.response.status === 401) {
+          console.log('/user/me Failed with 401 Unauthorized');
         }
-      } else {
-        console.log('No token found, skipping user fetch.'); // 토큰이 없을 경우
       }
     };
 
