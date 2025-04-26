@@ -1,4 +1,4 @@
-name: Deploy React App to EC2
+name: Deploy React to Instance
 
 on:
   push:
@@ -6,48 +6,77 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
+    environment: GCP-APPLE
+      
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: yarn install
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Build the React app
-      run: yarn build
+      - name: Install Dependencies
+        run: npm ci
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Build React App
+        run: npm run build
+        continue-on-error: false
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Debug SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}"
 
-    - name: Build and push Docker image
-      run: |
-        docker build --no-cache -t sx0527/my-react-app:latest .
-        docker push sx0527/my-react-app:latest
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.INSTANCE_IP }} >> ~/.ssh/known_hosts
 
-    - name: SSH and deploy to EC2
-      uses: appleboy/ssh-action@v0.1.5
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_KEY }}
-        script: |
-          docker pull sx0527/my-react-app:latest
-          docker stop react-container
-          docker rm react-container
-          docker run -d -p 3000:3000 --name react-container sx0527/my-react-app:latest
-          sleep 10  # 컨테이너가 시작될 시간을 주기 위해 약간의 지연을 추가
-          docker logs react-container  # 컨테이너 로그를 확인
+      - name: SSH into Instance and Prepare Server
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.INSTANCE_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "🔄 Removing old build files..."
+            sudo rm -rf /var/www/react-app/*
+            echo "✅ Old files removed."
+            sudo mkdir -p /var/www/neon
+            sudo chown -R $USER:$USER /var/www/react-app
+            sudo chmod -R 777 /var/www/react-app
+          
+      - name: Upload Build Files to Instance
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.INSTANCE_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "build/*"
+          target: "/var/www/neon/"
+
+      - name: Restart Nginx
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.INSTANCE_IP }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "🔄 Restarting Nginx..."
+            sudo systemctl restart nginx
+            echo "✅ Deployment complete!"
