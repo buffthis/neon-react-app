@@ -55,11 +55,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "🔄 Removing old build files..."
-            sudo rm -rf /var/www/react-app/*
+            sudo rm -rf /var/www/neon/*
             echo "✅ Old files removed."
             sudo mkdir -p /var/www/neon
-            sudo chown -R $USER:$USER /var/www/react-app
-            sudo chmod -R 777 /var/www/react-app
+            sudo chown -R $USER:$USER /var/www/neon
+            sudo chmod -R 777 /var/www/neon
           
       - name: Upload Build Files to Instance
         uses: appleboy/scp-action@v0.1.7
