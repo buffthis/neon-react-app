@@ -4,7 +4,7 @@ import githubLogo from '../assets/github-logo.png';
 import linktreeLogo from '../assets/linktree-logo.jpg';
 import image from '../assets/logo-sky-lg.png';
 import notionLogo from '../assets/notion-logo.png';
-import potatoLogo from '../assets/potato-fit.png';
+import shaunLogo from '../assets/shaun-fit.png';
 import useAuthStore from '../stores/authStore';
 import './MaintenanceForm.css';
 import { fetchMe } from '../api/userApi';
@@ -47,8 +47,8 @@ const Maintenance = () => {
       </p>
       <div className="links-wrapper">
         <div className="link-container">
-          <img src={potatoLogo} alt="Potato" className="logo-sm" />
-          <a href="https://siyoon.site" className="link" target="_blank" rel="noopener noreferrer">https://siyoon.site</a>
+          <img src={shaunLogo} alt="Potato" className="logo-sm" />
+          <a href="https://hyeongjun.me" className="link" target="_blank" rel="noopener noreferrer">https://hyeongjun.me</a>
         </div>
         <div className="link-container">
           <img src={linktreeLogo} alt="Linktree" className="logo-sm" />
@@ -56,11 +56,11 @@ const Maintenance = () => {
         </div>
         <div className="link-container">
           <img src={githubLogo} alt="GitHub" className="logo-sm" />
-          <a href="https://github.com/SteamedPapaya" className="link" target="_blank" rel="noopener noreferrer">https://github.com/SteamedPapaya</a>
+          <a href="https://github.com/buffthis" className="link" target="_blank" rel="noopener noreferrer">https://github.com/buffthis</a>
         </div>
         <div className="link-container">
           <img src={notionLogo} alt="Notion" className="logo-sm" />
-          <a href="https://www.notion.so/xiyoon/f8777a529adc4ae9997a1ae26fca172c?pvs=4" className="link" target="_blank" rel="noopener noreferrer">https://www.notion.so/xiyoon/neon</a>
+          <a href="https://www.notion.so/hyeongjun-dev/1a09683271d081a2ab96d306ca0af8c9?pvs=4" className="link" target="_blank" rel="noopener noreferrer">https://www.notion.so/neon</a>
         </div>
       </div>
 
