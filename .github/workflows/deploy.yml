@@ -45,13 +45,13 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.INSTANCE_IP }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ vars.INSTANCE_IP }} >> ~/.ssh/known_hosts
 
       - name: SSH into Instance and Prepare Server
         uses: appleboy/ssh-action@v1.2.2
         with:
-          host: ${{ secrets.INSTANCE_IP }}
-          username: ${{ secrets.USERNAME }}
+          host: ${{ vars.INSTANCE_IP }}
+          username: ${{ vars.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "🔄 Removing old build files..."
@@ -64,8 +64,8 @@ jobs:
       - name: Upload Build Files to Instance
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.INSTANCE_IP }}
-          username: ${{ secrets.USERNAME }}
+          host: ${{ vars.INSTANCE_IP }}
+          username: ${{ vars.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "build/*"
           target: "/var/www/neon/"
@@ -73,8 +73,8 @@ jobs:
       - name: Restart Nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.INSTANCE_IP }}
-          username: ${{ secrets.USERNAME }}
+          host: ${{ vars.INSTANCE_IP }}
+          username: ${{ vars.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "🔄 Restarting Nginx..."
